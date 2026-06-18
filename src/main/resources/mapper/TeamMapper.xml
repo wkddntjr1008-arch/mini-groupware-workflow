@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wooseok.minigroupware.mapper.TeamMapper">
+
+    <resultMap id="teamResultMap" type="Team">
+        <id property="teamId" column="team_id"/>
+        <result property="teamName" column="team_name"/>
+        <result property="teamDesc" column="team_desc"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <insert id="insertTeam" parameterType="Team" useGeneratedKeys="true" keyProperty="teamId">
+        INSERT INTO team (
+            team_name,
+            team_desc,
+            created_at,
+            updated_at
+        ) VALUES (
+            #{teamName},
+            #{teamDesc},
+            NOW(),
+            NOW()
+        )
+    </insert>
+
+    <select id="findAll" resultMap="teamResultMap">
+        SELECT
+            team_id,
+            team_name,
+            team_desc,
+            created_at,
+            updated_at
+        FROM team
+        ORDER BY team_id DESC
+    </select>
+
+    <select id="findById" parameterType="long" resultMap="teamResultMap">
+        SELECT
+            team_id,
+            team_name,
+            team_desc,
+            created_at,
+            updated_at
+        FROM team
+        WHERE team_id = #{teamId}
+    </select>
+
+</mapper>
