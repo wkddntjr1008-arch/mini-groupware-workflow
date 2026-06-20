@@ -4,4 +4,5 @@ target/
 *.iml
 *.log
 *.class
+src/main/resources/application-local.yml
 !src/main/webapp/WEB-INF/jsp/**/*.jsp
